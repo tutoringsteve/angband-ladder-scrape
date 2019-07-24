@@ -1,0 +1,68 @@
+Here we are going to examine the dataset scraped from the http://angband.oook.cz/ladder-browse.php?v=Angband
+
+We scraped the data with angScrape.r
+
+We cleaned the data with angClean.r
+
+Here the aim is to examine the data, pull out nuggets of information, and see what if anything, we can determine about winning this game.
+
+```{r}
+#load the cleaned data set
+
+load(file = "clean_df.RData")
+
+#examine the first 6 rows
+head(clean_df)
+
+#examine the last 6 rows
+tail(clean_df)
+
+#Take a glimpse at the table
+glimpse(clean_df)
+
+#Take a look at the summary
+summary(clean_df)
+
+```
+
+One question we might have is "what classes" are people choosing? The class is a very important part of character creation, as it determines which stats are important to your character, which abilities your character will start with, and which abilities your character will have access to at higher levels. Some classes obtain holy magic, some regular magic, and some no magic. Those without magical abilities, like the warrior class, maybe compensated with increased physical attack attributes. 
+
+```{r}
+class_freq <- summary(factor(clean_df$class))
+class_freq
+```
+
+Unfortunately, from the rephial.org website (the official angband website) we can see that the only valid classes are "Warrior" "Mage" "Priest" "Rogue" "Ranger" "Paladin", so that the "Barbarian" "Blackguard" and "Druid" classes must be from erroneous character dumps.
+
+```{r}
+remove <- which(clean_df$class == "Barbarian" | clean_df$class == "Druid" | clean_df$class == "Blackguard" | clean_df$class == "Necromancer")
+clean_df2 <- clean_df[-remove,]
+
+class_freq <- summary(factor(clean_df2$class))
+class_freq <- round(100*(class_freq/sum(class_freq)),2)
+
+library(ggplot2)
+clean_df2 %>%
+  ggplot(aes(x = factor(class))) + geom_bar() + ggtitle("Character classes") 
+clean_df2 %>%
+  filter(status == "winner") %>%
+  ggplot(aes(x = factor(class))) + geom_bar() + ggtitle("Winning character classes")
+```
+
+Notice now how the distribution of character classes on the ladder differs very little from the distribution of character classes of winners! This probably means that character class is not a good predictor of who will win. This is counter intuitive to me at first, but then I realize that this makes sense if you consider that Angband wins depend more on the gear that is found than the initial class choice.
+
+Another question we might have is, who are the veterans choosing for their classes?
+
+This question is almost impossible to answer. Most people do not submit character dumps. I played Angband for almost 20 years before finally winning and sumbitting a character dump (under the user name: forcesofodin, and the character name: Nolin.) 
+
+```{r}
+by <- factor(clean_df2$by)
+people <- levels(by)
+summary(by)
+
+veterans <- names(summary(by)>9 & summary(by) < 2000)
+veterans <- veterans[-length(veterans)]
+veterans
+
+head(df)
+```
