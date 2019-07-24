@@ -7,8 +7,8 @@ When I was learning R I thought it would be interesting to scrape the ladder dat
 
 Therefore, this project is broken up into three components.
 
-<b>1.</b> I <u>scrape</u> the http://angband.oook.cz/ladder.php website for Angband characters (there are many variants but I scrape only characters on the ladder that uploaded to "vanilla" Angband. The scrape is found in the script named "<u>angScrape.r</u>."
+<b>1.</b> I ***scrape*** the <http://angband.oook.cz/ladder.php> website for Angband characters (there are many variants but I scrape only characters on the ladder that uploaded to "vanilla" Angband.) The scrape is found in the script named ***angScrape.r***.
 
-<b>2.</b> I <u>clean</u> the data using R. The cleaning portion of this process is found in the script named "<u>angClean.r</u>."
+<b>2.</b> I ***clean*** the data using R. The cleaning portion of this process is found in the script named ***angClean.r***.
 
-<b>3.</b> I <u>analyze</u> the data using R. I do this in an RMarkDown .RMD file which compiles into a .html file so that I can interweave commentary and code, presenting the information in a way that can be read on any web browser. The uncompiled RMarkDown file is called "<u>preview.Rmd</u>" and the html file it generates is called "<u>preview.html</u>."
+<b>3.</b> I ***analyze*** the data using R. I do this in an RMarkDown .RMD file which compiles into a .html file so that I can interweave commentary and code, presenting the information in a way that can be read on any web browser. The uncompiled RMarkDown file is called ***preview.Rmd*** and the html file it generates is called ***preview.html***.
