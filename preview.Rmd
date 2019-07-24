@@ -9,6 +9,8 @@ Here the aim is to examine the data, pull out nuggets of information, and see wh
 ```{r}
 #load the cleaned data set
 
+library(tidyverse)
+
 load(file = "clean_df.RData")
 
 #examine the first 6 rows
